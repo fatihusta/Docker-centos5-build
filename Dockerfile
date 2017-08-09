@@ -1,6 +1,10 @@
 FROM centos:5
 MAINTAINER alexander.neundorf@sharpreflections.com
 
+# Since Centos5 is EOL since April 2017, yum needs to check the "vault"-repositories
+# (copied from https://github.com/astj/docker-centos5-vault )
+COPY ./yum.repos.d/ /etc/yum.repos.d/
+
 # install a bunch of development packages
 RUN yum update -y && \
     yum install libidn libXext mc joe nano wget strace subversion sudo -y && \
