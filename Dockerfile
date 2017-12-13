@@ -13,7 +13,7 @@ RUN yum update -y && \
     yum install libidn libXext mc joe nano wget curl.x86_64 strace subversion sudo man man-pages -y && \
     yum install apr-devel apr-util-devel openssl-devel -y && \
     yum groupinstall "Development Tools" -y && \
-    yum install libX11-devel libSM-devel libxml2-devel libjpeg-devel mesa-libGLU-devel freetype-devel -y
+    yum install libX11-devel libXext-devel libXrender-devel libSM-devel libxml2-devel libjpeg-devel mesa-libGLU-devel freetype-devel -y
 
 
 # install cmake
