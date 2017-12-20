@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/dl && \
     rm /tmp/dl/*
 
 
-# build svn 1.7.22
+# build various packages
 RUN mkdir -p /tmp/src/
 
 # get a recent enough sqlite:
@@ -107,9 +107,16 @@ RUN wget http://ftp5.gwdg.de/pub/linux/slackware/slackware-12.2/source/d/git/git
     make -j4 && \
     make install
 
+
+# try to save some space
+RUN rm -rf /tmp/src
+RUN mkdir -p /tmp/src/
+
 # build gcc 4.9.4
 WORKDIR /tmp/src
-RUN wget http://ftp.gwdg.de/pub/misc/gcc/releases/gcc-4.9.4/gcc-4.9.4.tar.gz && \
+RUN echo "*** Building gcc..." && \
+    echo "*** Downloading gcc & friends..." && \
+    wget http://ftp.gwdg.de/pub/misc/gcc/releases/gcc-4.9.4/gcc-4.9.4.tar.gz && \
     wget http://ftp.gwdg.de/pub/misc/gcc/infrastructure/gmp-4.3.2.tar.bz2 && \
     wget http://ftp.gwdg.de/pub/misc/gcc/infrastructure/mpfr-2.4.2.tar.bz2 && \
     wget http://ftp.gwdg.de/pub/misc/gcc/infrastructure/mpc-0.8.1.tar.gz && \
@@ -129,6 +136,7 @@ RUN wget http://ftp.gwdg.de/pub/misc/gcc/releases/gcc-4.9.4/gcc-4.9.4.tar.gz && 
     mv cloog-0.18.1 cloog && \
     mkdir build && \
     cd build/ && \
+    echo "*** Configuring gcc..." && \
     ../configure --prefix=/opt/gcc-4.9.4 --disable-multilib --enable-languages=c,c++,fortran && \
     make install
 
