@@ -109,8 +109,8 @@ RUN wget http://ftp5.gwdg.de/pub/linux/slackware/slackware-12.2/source/d/git/git
 
 
 # try to save some space
-RUN rm -rf /tmp/src
-RUN mkdir -p /tmp/src/
+#RUN rm -rf /tmp/src
+#RUN mkdir -p /tmp/src/
 
 # build gcc 4.9.4
 WORKDIR /tmp/src
@@ -138,6 +138,7 @@ RUN echo "*** Building gcc..." && \
     cd build/ && \
     echo "*** Configuring gcc..." && \
     ../configure --prefix=/opt/gcc-4.9.4 --disable-multilib --enable-languages=c,c++,fortran && \
+    make -j4 && \
     make install
 
 # cleanup
