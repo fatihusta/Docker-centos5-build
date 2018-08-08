@@ -17,13 +17,13 @@ RUN yum update -y && \
 
 
 # install cmake
-WORKDIR /opt
-RUN mkdir -p /tmp/dl && \
-    wget -P /tmp/dl --no-check-certificate https://cmake.org/files/v3.6/cmake-3.6.3-Linux-x86_64.tar.gz && \
-    wget -P /tmp/dl --no-check-certificate https://cmake.org/files/v3.1/cmake-3.1.3-Linux-x86_64.tar.gz && \
-    tar -zxvf /tmp/dl/cmake-3.6.3-Linux-x86_64.tar.gz && \
-    tar -zxvf /tmp/dl/cmake-3.1.3-Linux-x86_64.tar.gz && \
-    rm /tmp/dl/*
+#WORKDIR /opt
+#RUN mkdir -p /tmp/dl && \
+#    wget -P /tmp/dl --no-check-certificate https://cmake.org/files/v3.6/cmake-3.6.3-Linux-x86_64.tar.gz && \
+#   wget -P /tmp/dl --no-check-certificate https://cmake.org/files/v3.1/cmake-3.1.3-Linux-x86_64.tar.gz && \
+#    tar -zxvf /tmp/dl/cmake-3.6.3-Linux-x86_64.tar.gz && \
+#    tar -zxvf /tmp/dl/cmake-3.1.3-Linux-x86_64.tar.gz && \
+#    rm /tmp/dl/*
 
 
 # build various packages
@@ -56,7 +56,7 @@ RUN svn co  http://svn.apache.org/repos/asf/apr/apr-util/branches/1.3.x  apr-uti
 WORKDIR /opt
 RUN mkdir -p /tmp/dl && \
     mkdir -p /opt/scons-2.3 && \
-    wget -P /tmp/dl http://prdownloads.sourceforge.net/scons/scons-local-2.3.0.tar.gz && \
+    wget -P /tmp/dl --no-check-certificate http://prdownloads.sourceforge.net/scons/scons-local-2.3.0.tar.gz && \
     cd scons-2.3 && \
     tar -zxvf /tmp/dl/scons-local-2.3.0.tar.gz && \
     rm /tmp/dl/*
@@ -64,7 +64,7 @@ RUN mkdir -p /tmp/dl && \
 
 # get Apache Serf (needed for https in svn)
 WORKDIR /tmp/src
-RUN wget --no-check-certificate https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2 && \
+RUN wget http://www.apache.org/dist/serf/serf-1.3.9.tar.bz2 && \
     tar -jxvf serf-1.3.9.tar.bz2 && \
     cd serf-1.3.9 && \
     /opt/scons-2.3/scons.py PREFIX=/opt/serf-1.3.9 APR=/opt/apr-1.3 APU=/opt/apr-1.3 && \
